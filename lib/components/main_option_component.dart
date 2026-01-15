@@ -13,10 +13,21 @@ class MainOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Icon(
-          icon,
-          size: 52,
-          color: Colors.white,
+        Container(
+          padding: EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(40),
+            border: Border.all(
+              color: Colors.yellowAccent,
+              width: 1.2,
+            ),
+          ),
+          child: Icon(
+            icon,
+            size: 38,
+            color: Colors.white,
+          ),
         ),
         Text(title, style: appStyle),
       ],

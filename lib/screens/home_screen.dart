@@ -2,6 +2,57 @@ import 'package:demo_project/components/app_title_component.dart';
 import 'package:demo_project/components/main_option_component.dart';
 import 'package:flutter/material.dart';
 
+List<Map<String, dynamic>> bankilyServices = [
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+  {
+    'name': "Credit",
+    'icon': Icons.mobile_friendly,
+  },
+  {
+    'name': "Pay Bills",
+    'icon': Icons.wallet,
+  },
+];
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -29,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.05,
+                  height: MediaQuery.sizeOf(context).height * 0.046,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,6 +93,41 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.6,
+            child: GridView(
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+              ),
+              children: bankilyServices
+                  .map((element) => BankilyService())
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BankilyService extends StatelessWidget {
+  const BankilyService({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      height: MediaQuery.sizeOf(context).height * 0.1,
+      width: MediaQuery.sizeOf(context).height * 0.1,
+      margin: EdgeInsets.all(12),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.abc),
+          Text('Widget'),
         ],
       ),
     );
