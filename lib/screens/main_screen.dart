@@ -19,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     FavoritesScreen(),
     NotificationsScreen(),
     HelpScreen(),
+    // this is list
   ];
 
   @override
