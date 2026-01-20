@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.12.0
+  pinput: ^6.0.1
 
 dev_dependencies:
   flutter_test:
