@@ -1,10 +1,20 @@
+import 'package:demo_project/main.dart';
+import 'package:demo_project/services/database/login.dart';
+import 'package:demo_project/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pinput/pinput.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String phoneNumber = '';
+  String code = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +44,11 @@ class LoginScreen extends StatelessWidget {
                             width: MediaQuery.sizeOf(context).width * 0.8,
                             child: TextField(
                               keyboardType: TextInputType.phone,
+                              onChanged: (value) {
+                                setState(() {
+                                  phoneNumber = value;
+                                });
+                              },
                             ),
                           ),
                         ],
@@ -59,7 +74,13 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                             height: 35,
                             width: MediaQuery.sizeOf(context).width * 0.8,
-                            child: Pinput(),
+                            child: Pinput(
+                              onChanged: (value) {
+                                setState(() {
+                                  code = value;
+                                });
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -84,7 +105,58 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.27,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'مستخدم جديد ؟ إنشاء حساب',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                bool isLogin = loginUser(phoneNumber, code);
+                if (isLogin == true) {
+                  isLogged = true;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (contex) => MainScreen()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Container(
+                        child: Center(
+                          child: Text(
+                            'Password Incorrect',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                color: Colors.amber,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    'تسجيل الدخول',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

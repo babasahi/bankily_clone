@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: !isLogged
+        child: isLogged
             ? Scaffold(
                 body: screens[currentScreen],
                 bottomNavigationBar: BottomNavigationBar(
