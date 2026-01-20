@@ -1,7 +1,7 @@
-import 'package:demo_project/components/app_title_component.dart';
-import 'package:demo_project/components/bankily_service_component.dart';
-import 'package:demo_project/components/main_option_component.dart';
-import 'package:demo_project/screens/accounts_screen.dart';
+import 'package:demo_project/views/components/app_title_component.dart';
+import 'package:demo_project/views/components/bankily_service_component.dart';
+import 'package:demo_project/views/components/main_option_component.dart';
+import 'package:demo_project/views/screens/accounts_screen.dart';
 import 'package:flutter/material.dart';
 
 List<Map<String, dynamic>> bankilyServices = [

@@ -1,7 +1,7 @@
-import 'package:demo_project/screens/favorites_screen.dart';
-import 'package:demo_project/screens/help_screen.dart';
-import 'package:demo_project/screens/home_screen.dart';
-import 'package:demo_project/screens/notifications_screen.dart';
+import 'package:demo_project/views/screens/favorites_screen.dart';
+import 'package:demo_project/views/screens/help_screen.dart';
+import 'package:demo_project/views/screens/home_screen.dart';
+import 'package:demo_project/views/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
