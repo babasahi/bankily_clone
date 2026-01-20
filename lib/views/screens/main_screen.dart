@@ -1,6 +1,8 @@
+import 'package:demo_project/main.dart';
 import 'package:demo_project/views/screens/favorites_screen.dart';
 import 'package:demo_project/views/screens/help_screen.dart';
 import 'package:demo_project/views/screens/home_screen.dart';
+import 'package:demo_project/views/screens/login_screen.dart';
 import 'package:demo_project/views/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,41 +27,44 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: Scaffold(
-          body: screens[currentScreen],
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (value) {
-              setState(() {
-                currentScreen = value;
-              });
-            },
-            currentIndex: currentScreen,
-            selectedItemColor: Color.fromRGBO(56, 186, 216, 1),
-            unselectedItemColor: Colors.grey,
-            showUnselectedLabels: true,
-            iconSize: 28,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'المنزل',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.star_border),
-                label: 'المفضلة',
-              ),
+        child: !isLogged
+            ? Scaffold(
+                body: screens[currentScreen],
+                bottomNavigationBar: BottomNavigationBar(
+                  onTap: (value) {
+                    setState(() {
+                      currentScreen = value;
+                    });
+                  },
+                  currentIndex: currentScreen,
+                  selectedItemColor: Color.fromRGBO(56, 186, 216, 1),
+                  unselectedItemColor: Colors.grey,
+                  showUnselectedLabels: true,
+                  iconSize: 28,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home_outlined),
+                      label: 'المنزل',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.star_border),
+                      label: 'المفضلة',
+                    ),
 
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notifications_outlined),
-                label: 'إشعارات',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.help_outline_outlined),
-                label: 'المساعدة',
-              ),
-            ],
-          ),
-        ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.notifications_outlined),
+                      label: 'إشعارات',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.help_outline_outlined),
+                      label: 'المساعدة',
+                    ),
+                  ],
+                ),
+              )
+            : LoginScreen(),
       ),
     );
   }
