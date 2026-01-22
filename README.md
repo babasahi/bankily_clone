@@ -2,4 +2,5 @@
 
 Bankily clone written by Babe Saleh Mahfoud for the Flutter Bootcamp from 18 December to 2 February.
 
-hgjfdsfhsdsdj
+- Auth Persistance.
+- State Management.

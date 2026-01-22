@@ -1,4 +1,6 @@
 import 'package:demo_project/main.dart';
+import 'package:demo_project/models/bankily_user.dart';
+import 'package:demo_project/services/database/caching.dart';
 import 'package:demo_project/services/database/login.dart';
 import 'package:demo_project/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -121,10 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                bool isLogin = loginUser(phoneNumber, code);
+              onTap: () async {
+                BankilyUser u = BankilyUser(
+                  phoneNumber: phoneNumber,
+                  code: code,
+                );
+                bool isLogin = await loginUser(u);
                 if (isLogin == true) {
-                  isLogged = true;
+                  await cacheUser(u);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (contex) => MainScreen()),
