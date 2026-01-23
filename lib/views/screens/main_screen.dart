@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: isLogged
+        child: isLogged == true
             ? Scaffold(
                 body: screens[currentScreen],
                 bottomNavigationBar: BottomNavigationBar(
@@ -69,3 +69,6 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+// Ternary operation if () else 
+
+// CONDITION ? DO_THIS : INSTEAD_DO_THIS

@@ -1,6 +1,5 @@
-import 'package:demo_project/main.dart';
 import 'package:demo_project/models/bankily_user.dart';
-import 'package:demo_project/services/database/caching.dart';
+import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/services/database/login.dart';
 import 'package:demo_project/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
