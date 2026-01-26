@@ -15,8 +15,17 @@ Future<BankilyUser?> getUser() async {
   String? phoneNumber = await prefs.getString('phone_number');
 
   if (code != null && phoneNumber != null) {
+    print('got cached user');
     return BankilyUser(phoneNumber: phoneNumber, code: code);
   } else {
     return null;
   }
+}
+
+Future<void> deleteCachedUser() async {
+  print('deleting cached user');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  await prefs.remove('code');
+  await prefs.remove('phone_number');
 }

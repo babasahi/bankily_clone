@@ -1,4 +1,6 @@
 import 'package:demo_project/main.dart';
+import 'package:demo_project/models/bankily_user.dart';
+import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/views/screens/favorites_screen.dart';
 import 'package:demo_project/views/screens/help_screen.dart';
 import 'package:demo_project/views/screens/home_screen.dart';
@@ -21,7 +23,6 @@ class _MainScreenState extends State<MainScreen> {
     FavoritesScreen(),
     NotificationsScreen(),
     HelpScreen(),
-    // this is list
   ];
 
   @override
@@ -29,42 +30,53 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: isLogged == true
-            ? Scaffold(
-                body: screens[currentScreen],
-                bottomNavigationBar: BottomNavigationBar(
-                  onTap: (value) {
-                    setState(() {
-                      currentScreen = value;
-                    });
-                  },
-                  currentIndex: currentScreen,
-                  selectedItemColor: Color.fromRGBO(56, 186, 216, 1),
-                  unselectedItemColor: Colors.grey,
-                  showUnselectedLabels: true,
-                  iconSize: 28,
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home_outlined),
-                      label: 'المنزل',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.star_border),
-                      label: 'المفضلة',
-                    ),
+        child: FutureBuilder<BankilyUser?>(
+          future: getUser(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return CircularProgressIndicator();
+            } else {
+              if (snapshot.data == null) {
+                return LoginScreen();
+              } else {
+                return Scaffold(
+                  body: screens[currentScreen],
+                  bottomNavigationBar: BottomNavigationBar(
+                    onTap: (value) {
+                      setState(() {
+                        currentScreen = value;
+                      });
+                    },
+                    currentIndex: currentScreen,
+                    selectedItemColor: Color.fromRGBO(56, 186, 216, 1),
+                    unselectedItemColor: Colors.grey,
+                    showUnselectedLabels: true,
+                    iconSize: 28,
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.home_outlined),
+                        label: 'المنزل',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.star_border),
+                        label: 'المفضلة',
+                      ),
 
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.notifications_outlined),
-                      label: 'إشعارات',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.help_outline_outlined),
-                      label: 'المساعدة',
-                    ),
-                  ],
-                ),
-              )
-            : LoginScreen(),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.notifications_outlined),
+                        label: 'إشعارات',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.help_outline_outlined),
+                        label: 'المساعدة',
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }
+          },
+        ),
       ),
     );
   }
@@ -72,3 +84,12 @@ class _MainScreenState extends State<MainScreen> {
 // Ternary operation if () else 
 
 // CONDITION ? DO_THIS : INSTEAD_DO_THIS
+
+
+
+
+
+/*
+
+     
+*/
