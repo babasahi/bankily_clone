@@ -1,4 +1,3 @@
-import 'package:demo_project/main.dart';
 import 'package:demo_project/models/bankily_user.dart';
 import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/views/screens/favorites_screen.dart';
