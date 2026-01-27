@@ -29,3 +29,5 @@ Future<void> deleteCachedUser() async {
   await prefs.remove('code');
   await prefs.remove('phone_number');
 }
+
+// Server
