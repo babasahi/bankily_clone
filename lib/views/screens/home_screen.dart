@@ -1,7 +1,9 @@
+import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/views/components/app_title_component.dart';
 import 'package:demo_project/views/components/bankily_service_component.dart';
 import 'package:demo_project/views/components/main_option_component.dart';
 import 'package:demo_project/views/screens/accounts_screen.dart';
+import 'package:demo_project/views/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 List<Map<String, dynamic>> bankilyServices = [
@@ -53,11 +55,22 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     AppTitle(),
-                    Padding(
-                      padding: EdgeInsetsGeometry.only(
-                        left: MediaQuery.sizeOf(context).width / 3.4,
+                    GestureDetector(
+                      onTap: () async {
+                        await deleteCachedUser();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(
+                          left: MediaQuery.sizeOf(context).width / 3.4,
+                        ),
+                        child: Image.asset('assets/icons/home_drawer_icon.png'),
                       ),
-                      child: Image.asset('assets/icons/home_drawer_icon.png'),
                     ),
                   ],
                 ),

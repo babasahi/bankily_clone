@@ -1,11 +1,9 @@
-import 'package:demo_project/models/bankily_user.dart';
 import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/views/screens/favorites_screen.dart';
 import 'package:demo_project/views/screens/help_screen.dart';
 import 'package:demo_project/views/screens/home_screen.dart';
 import 'package:demo_project/views/screens/login_screen.dart';
 import 'package:demo_project/views/screens/notifications_screen.dart';
-import 'package:demo_project/views/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -30,10 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: RegisterScreen(),
-
-        /*
-         FutureBuilder<BankilyUser?>(
+        child: FutureBuilder(
           future: getUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
@@ -80,7 +75,6 @@ class _MainScreenState extends State<MainScreen> {
             }
           },
         ),
-        */
       ),
     );
   }
@@ -94,6 +88,5 @@ class _MainScreenState extends State<MainScreen> {
 
 
 /*
-
      
 */

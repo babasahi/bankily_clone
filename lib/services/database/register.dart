@@ -1,35 +1,40 @@
 import 'dart:convert';
-
 import 'package:demo_project/models/bankily_user.dart';
-import 'package:demo_project/services/database/login.dart';
 import 'package:http/http.dart' as http;
 
+const String backendUrl = 'https://uninspirited-multilobar-glen.ngrok-free.dev';
+
 Future<BankilyUser?> registerUser(BankilyUser user) async {
-  Map<String, String> body = {
-    'full_name': user.name,
-    'phone': user.phoneNumber,
-    'password': user.password,
-  };
-
-  Map<String, String> headers = {
-    'Content-Type': 'application/json',
-  };
-
   try {
-    final response = await http.post(
-      Uri.parse(backendUrl + '/auth/register'),
+    Map<String, String> headers = {'Content-Type': 'application/json'};
+
+    Uri url = Uri.parse(backendUrl + '/auth/register');
+
+    Map<String, dynamic> body = {
+      "password": user.password,
+      "full_name": user.name,
+      "phone": user.phoneNumber,
+    };
+
+    var response = await http.post(
+      url,
       body: jsonEncode(body),
       headers: headers,
     );
-    if (response.statusCode == 201) {
-      print(response.body);
-      return null;
-    } else {
-      print(response.body);
-      return null;
-    }
+    var data = jsonDecode(response.body);
+
+    return BankilyUser(
+      phoneNumber: data['user']['phone'],
+      name: data['user']['full_name'],
+      password: data['user']['password'],
+      token: data['token'],
+    );
   } catch (e) {
-    print(e);
-    return null;
+    print(e.toString());
   }
 }
+
+// 200 OK
+// 500 SERVER ERROR
+// 400 Not Found
+// 300 Moved

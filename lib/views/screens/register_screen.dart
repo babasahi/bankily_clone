@@ -27,6 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: const EdgeInsets.only(right: 16.0),
               child: Image.asset('assets/icons/logo_bankily.png'),
             ),
+
             // takes full name, phone number and a password
             SizedBox(height: 16.0),
             Directionality(
@@ -69,30 +70,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   backgroundColor: Colors.blue,
                 ),
                 onPressed: () async {
-                  BankilyUser user = BankilyUser(
+                  BankilyUser newUser = BankilyUser(
                     phoneNumber: phoneNumberController.text,
                     name: nameController.text,
                     password: passwordController.text,
                   );
-                  BankilyUser? newUser = await registerUser(user);
-                  if (newUser != null) {
+                  BankilyUser? created = await registerUser(newUser);
+                  if (created != null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('تم انشاء الحساب بنجاح'),
-                      ),
+                      SnackBar(content: Text('تم تسجيل المستخدم بنجاح')),
                     );
-                    await cacheUser(newUser);
+                    await cacheUser(created);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => MainScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => MainScreen()),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('حدث خطأ في انشاء الحساب'),
-                      ),
+                      SnackBar(content: Text('لم يتم إنشاء المستخدم')),
                     );
                   }
                 },

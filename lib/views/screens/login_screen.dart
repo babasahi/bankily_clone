@@ -2,6 +2,7 @@ import 'package:demo_project/models/bankily_user.dart';
 import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/services/database/login.dart';
 import 'package:demo_project/views/screens/main_screen.dart';
+import 'package:demo_project/views/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pinput/pinput.dart';
@@ -109,12 +110,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: MediaQuery.sizeOf(context).height * 0.27,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'مستخدم جديد ؟ إنشاء حساب',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterScreen(),
+                        ),
+                      );
+                    },
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'مستخدم جديد ؟ إنشاء حساب',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
