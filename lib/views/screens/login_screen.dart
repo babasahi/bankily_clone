@@ -124,8 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () async {
                 BankilyUser u = BankilyUser(
+                  name: '',
+                  password: '',
                   phoneNumber: phoneNumber,
-                  code: code,
                 );
                 bool isLogin = await loginUser(u);
                 if (isLogin == true) {

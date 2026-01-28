@@ -5,18 +5,24 @@ Future<void> cacheUser(BankilyUser user) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setString('phone_number', user.phoneNumber);
-  await prefs.setString('code', user.phoneNumber);
+  await prefs.setString('password', user.password);
+  await prefs.setString('name', user.name);
 }
 
 Future<BankilyUser?> getUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  String? code = await prefs.getString('code');
-  String? phoneNumber = await prefs.getString('phone_number');
+  String? password = prefs.getString('password');
+  String? phoneNumber = prefs.getString('phone_number');
+  String? name = prefs.getString('name');
 
-  if (code != null && phoneNumber != null) {
+  if (password != null && phoneNumber != null && name != null) {
     print('got cached user');
-    return BankilyUser(phoneNumber: phoneNumber, code: code);
+    return BankilyUser(
+      phoneNumber: phoneNumber,
+      password: password,
+      name: name,
+    );
   } else {
     return null;
   }

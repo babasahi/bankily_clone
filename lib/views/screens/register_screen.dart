@@ -1,3 +1,5 @@
+import 'package:demo_project/models/bankily_user.dart';
+import 'package:demo_project/services/database/register.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -8,13 +10,82 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Image.asset('assets/icons/logo_bankily.png'),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Image.asset('assets/icons/logo_bankily.png'),
+            ),
+            // takes full name, phone number and a password
+            SizedBox(height: 16.0),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'الاسم الكامل',
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: TextField(
+                controller: phoneNumberController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'رقم الهاتف',
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'كلمة المرور',
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: () async {
+                  BankilyUser user = BankilyUser(
+                    phoneNumber: phoneNumberController.text,
+                    name: nameController.text,
+                    password: passwordController.text,
+                  );
+                  await registerUser(user);
+                },
+                child: Text(
+                  'انشاء حساب',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
