@@ -1,5 +1,7 @@
 import 'package:demo_project/models/bankily_user.dart';
+import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/services/database/register.dart';
+import 'package:demo_project/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -72,7 +74,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     name: nameController.text,
                     password: passwordController.text,
                   );
-                  await registerUser(user);
+                  BankilyUser? newUser = await registerUser(user);
+                  if (newUser != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('تم انشاء الحساب بنجاح'),
+                      ),
+                    );
+                    await cacheUser(newUser);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('حدث خطأ في انشاء الحساب'),
+                      ),
+                    );
+                  }
                 },
                 child: Text(
                   'انشاء حساب',

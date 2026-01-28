@@ -1,20 +1,25 @@
+import 'dart:convert';
+
 import 'package:demo_project/models/bankily_user.dart';
+import 'package:demo_project/services/database/login.dart';
 import 'package:http/http.dart' as http;
 
 Future<BankilyUser?> registerUser(BankilyUser user) async {
-  Map<String, String> headers = {
-    'Content-Type': 'application/json',
-  };
   Map<String, String> body = {
-    'name': user.name,
+    'full_name': user.name,
     'phone': user.phoneNumber,
     'password': user.password,
   };
+
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+
   try {
     final response = await http.post(
-      Uri.parse('http://localhost:3000/register'),
+      Uri.parse(backendUrl + '/auth/register'),
+      body: jsonEncode(body),
       headers: headers,
-      body: body,
     );
     if (response.statusCode == 201) {
       print(response.body);
