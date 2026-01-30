@@ -73,7 +73,7 @@ class AccountsScreen extends StatelessWidget {
           ),
 
           FutureBuilder(
-            future: getAccountBalance(user.token),
+            future: getAccountBalance(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData) {
@@ -87,7 +87,7 @@ class AccountsScreen extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text(
                         'الرصيد',
                         style: TextStyle(
@@ -97,7 +97,7 @@ class AccountsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        'MRU 0',
+                        'MRU ${snapshot.data}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
