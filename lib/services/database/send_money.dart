@@ -1,29 +1,37 @@
 import 'dart:convert';
+
 import 'package:demo_project/services/caching.dart';
 import 'package:demo_project/services/database/register.dart';
 import 'package:http/http.dart' as http;
 
-Future<double?> getAccountBalance() async {
+Future<String> sendMoney(double amount, String receiverPhone, note) async {
   try {
     String token = await getToken() ?? '';
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    final response = await http.get(
-      Uri.parse(backendUrl + '/account/balance'),
+    Map<String, String> body = {
+      "recipient_phone": receiverPhone,
+      "amount": amount.toString(),
+      "note": note,
+    };
+    print(body);
+    print(headers);
+    final response = await http.post(
+      Uri.parse(backendUrl + '/transactions/send'),
       headers: headers,
+      body: jsonEncode(body),
     );
     if (response.statusCode == 200) {
       print(response.body);
-      var data = jsonDecode(response.body);
-      return data['balance'];
+      return 'success';
     } else {
       print(response.body);
-      return null;
+      return response.body;
     }
   } catch (e) {
     print(e.toString());
-    return null;
+    return e.toString();
   }
 }

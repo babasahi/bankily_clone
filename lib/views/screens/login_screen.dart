@@ -136,12 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () async {
                 BankilyUser u = BankilyUser(
                   name: '',
-                  password: '',
+                  password: code,
                   phoneNumber: phoneNumber,
                 );
-                bool isLogin = await loginUser(u);
-                if (isLogin == true) {
-                  await cacheUser(u);
+                BankilyUser? user = await loginUser(u);
+                if (user != null) {
+                  await cacheUser(user);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (contex) => MainScreen()),

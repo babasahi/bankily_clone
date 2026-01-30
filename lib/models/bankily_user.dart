@@ -15,6 +15,7 @@ class BankilyUser {
       phoneNumber: json['phoneNumber'],
       name: json['name'],
       password: json['password'],
+      token: json['token'],
     );
   }
 }
