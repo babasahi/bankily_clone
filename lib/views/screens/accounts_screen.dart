@@ -6,21 +6,32 @@ class AccountsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('حسابي'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Account Screen'),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'account_screen');
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.red,
-                  size: 42,
+              Container(
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    Image.asset('assets/images/account.png'),
+                    Text('12.000.000'),
+                  ],
                 ),
               ),
             ],

@@ -22,19 +22,14 @@ Future<BankilyUser?> registerUser(BankilyUser user) async {
       headers: headers,
     );
     var data = jsonDecode(response.body);
-
+    print(data);
     return BankilyUser(
       phoneNumber: data['user']['phone'],
       name: data['user']['full_name'],
-      password: data['user']['password'],
+      password: '',
       token: data['token'],
     );
   } catch (e) {
     print(e.toString());
   }
 }
-
-// 200 OK
-// 500 SERVER ERROR
-// 400 Not Found
-// 300 Moved
