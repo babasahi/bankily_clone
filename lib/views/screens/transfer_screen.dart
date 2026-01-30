@@ -1,3 +1,4 @@
+import 'package:demo_project/views/screens/send_money_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -51,10 +52,20 @@ class TransferScreen extends StatelessWidget {
                             'assets/icons/fundtransfer_requestmoney.png',
                         color: Color.fromRGBO(254, 193, 11, 1),
                       ),
-                      TransferOption(
-                        title: 'ارسل المال',
-                        imageAsset: 'assets/icons/fundtransfer_sendmoney.png',
-                        color: Color.fromRGBO(3, 133, 150, 1),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SendMoneyScreen(),
+                            ),
+                          );
+                        },
+                        child: TransferOption(
+                          title: 'ارسل المال',
+                          imageAsset: 'assets/icons/fundtransfer_sendmoney.png',
+                          color: Color.fromRGBO(3, 133, 150, 1),
+                        ),
                       ),
                     ],
                   ),
