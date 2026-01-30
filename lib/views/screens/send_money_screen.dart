@@ -47,8 +47,8 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
           TextButton(
             onPressed: () async {
               await sendMoney(
-                double.parse(_amountController.text),
                 _phoneController.text,
+                double.parse(_amountController.text),
                 _noteController.text,
               ).then((value) {
                 if (value == 'success') {

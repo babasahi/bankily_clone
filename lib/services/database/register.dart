@@ -15,21 +15,29 @@ Future<BankilyUser?> registerUser(BankilyUser user) async {
       "full_name": user.name,
       "phone": user.phoneNumber,
     };
+    print(body);
 
     var response = await http.post(
       url,
       body: jsonEncode(body),
       headers: headers,
     );
-    var data = jsonDecode(response.body);
-    print(data);
-    return BankilyUser(
-      phoneNumber: data['user']['phone'],
-      name: data['user']['full_name'],
-      password: '',
-      token: data['token'],
-    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      return BankilyUser(
+        phoneNumber: jsonDecode(response.body)['user']['phone'],
+        name: jsonDecode(response.body)['user']['full_name'],
+        password: '',
+        token: jsonDecode(response.body)['token'],
+      );
+    } else {
+      print(response.statusCode);
+      print(response.body);
+      return null;
+    }
   } catch (e) {
     print(e.toString());
+    return null;
   }
 }
