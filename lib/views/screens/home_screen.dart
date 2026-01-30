@@ -4,6 +4,7 @@ import 'package:demo_project/views/components/bankily_service_component.dart';
 import 'package:demo_project/views/components/main_option_component.dart';
 import 'package:demo_project/views/screens/accounts_screen.dart';
 import 'package:demo_project/views/screens/login_screen.dart';
+import 'package:demo_project/views/screens/transfer_screen.dart';
 import 'package:flutter/material.dart';
 
 List<Map<String, dynamic>> bankilyServices = [
@@ -91,7 +92,20 @@ class HomeScreen extends StatelessWidget {
                       },
                       child: MainOption(title: 'حسابي', icon: Icons.receipt),
                     ),
-                    MainOption(title: 'تحويل الأموال', icon: Icons.paypal),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TransferScreen(),
+                          ),
+                        );
+                      },
+                      child: MainOption(
+                        title: 'تحويل الأموال',
+                        icon: Icons.paypal,
+                      ),
+                    ),
                     MainOption(title: 'دفع المشتريات', icon: Icons.payment),
                   ],
                 ),
