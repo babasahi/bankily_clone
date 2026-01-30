@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class TransferScreen extends StatelessWidget {
@@ -99,10 +100,38 @@ class TransferScreen extends StatelessWidget {
               color: Colors.grey.shade200,
               child: Center(
                 child: Text(
-                  'التحويل السريع',
+                  'اللوحة',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              'قم بإنشاء مجموعة جديدة أو حدد مجموعة حالية لتقسيم المبلغ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.13,
+              width: MediaQuery.of(context).size.height * 0.13,
+              child: DottedBorder(
+                options: RectDottedBorderOptions(
+                  color: Color.fromRGBO(0, 188, 213, 1),
+                  strokeWidth: 2,
+                  dashPattern: [2, 2],
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.add,
+                    color: Color.fromRGBO(0, 188, 213, 1),
+                    size: 38,
                   ),
                 ),
               ),
